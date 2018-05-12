@@ -1,0 +1,60 @@
+---
+title: "Spirograph API Clients"
+output: html_notebook
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(httr)
+library(jsonlite)
+library(magrittr)
+library(ggplot2)
+
+# base_url <- "http://localhost:8000"
+base_url <- "https://beta.rstudioconnect.com/content/3533"
+```
+
+
+Try the /spiro/plot POST endpoint
+
+```{r}
+url <- paste0(base_url,"/spiro/calc")
+params <- list(n1 = 11, n2 = -7, n3 = -3)
+
+result <- POST(url,body=params, encode="json") %>%
+  stop_for_status() %>%
+  content("text",encoding="UTF-8") %>%
+  fromJSON
+
+ggplot(data=result, aes(x=x,y=y)) +
+  geom_path() +
+  xlab("Real(z)") + 
+  ylab("Imag(z)")
+```
+
+
+Try it in bash
+
+```{bash}
+curl -s -X POST --data "n1=13&n2=-7&n3=-3" "https://beta.rstudioconnect.com/content/3533/spiro/calc"
+```
+
+
+Try it in Python
+
+```{python}
+
+import requests
+
+base_url = "https://beta.rstudioconnect.com/content/3533"
+
+url = base_url + "/spiro/calc"
+params = {"n1" : 11, "n2" : -7, "n3" : -3}
+
+r = requests.post(url,data=params)
+print(r.json())
+```
