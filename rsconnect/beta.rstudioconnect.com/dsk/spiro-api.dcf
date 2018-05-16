@@ -5,6 +5,6 @@ account: dsk
 server: beta.rstudioconnect.com
 hostUrl: https://beta.rstudioconnect.com/__api__
 appId: 3533
-bundleId: 8068
+bundleId: 8209
 url: https://beta.rstudioconnect.com/content/3533/
-when: 1525825835.89139
+when: 1526413964.82104

@@ -8,6 +8,16 @@ output: html_notebook
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+To try this example locally, start the server with the following commands:
+
+```{bash launch_server, eval=FALSE}
+cd ~/repos/dskard/spiro-plumber
+Rscript spiro_server.R
+
+# visit http://127.0.0.1:8000/__swagger__/ to ensure the serve is running.
+```
+
+
 ```{r}
 library(httr)
 library(jsonlite)
@@ -18,8 +28,24 @@ library(ggplot2)
 base_url <- "https://beta.rstudioconnect.com/content/3533"
 ```
 
+Try the /spiro/calc GET endpoint
 
-Try the /spiro/plot POST endpoint
+```{r}
+url <- paste0(base_url,"/spiro/calc")
+
+result <- GET(url, encode="json") %>%
+  stop_for_status() %>%
+  content("text",encoding="UTF-8") %>%
+  fromJSON
+
+ggplot(data=result, aes(x=x,y=y)) +
+  geom_path() +
+  xlab("Real(z)") + 
+  ylab("Imag(z)")
+```
+
+
+Try the /spiro/calc POST endpoint
 
 ```{r}
 url <- paste0(base_url,"/spiro/calc")
@@ -37,10 +63,52 @@ ggplot(data=result, aes(x=x,y=y)) +
 ```
 
 
+Try the /spiro/plot GET endpoint
+
+```{r}
+url <- paste0(base_url,"/spiro/plot?n1=11&n2=-7&n3=-3")
+
+result <- GET(url, encode="json") %>%
+  stop_for_status() %>%
+  content("raw")
+
+grid::grid.newpage()
+
+# read the result as a PNG and display it
+png::readPNG(result) %>%
+  grid::grid.raster()
+```
+
+
+Try the /spiro/xlsx POST endpoint
+
+```{r}
+url <- paste0(base_url,"/spiro/xlsx")
+params <- list(n1 = 0, n2 = 10, n3 = -3)
+
+result <- POST(url,body=params, encode="json") %>%
+  stop_for_status() %>%
+  content("raw")
+
+# write the returned xlsx data to disk
+fpath <- 'spiro_out.xlsx'
+h <- file(fpath,'wb')
+writeBin(result,h)
+close(h)
+
+# read back in the xls data and plot it
+readxl::read_xlsx(fpath) %>%
+  ggplot(aes(x=x,y=y)) +
+    geom_path() +
+    xlab("Real(z)") + 
+    ylab("Imag(z)")
+```
+
+
 Try it in bash
 
 ```{bash}
-curl -s -X POST --data "n1=13&n2=-7&n3=-3" "https://beta.rstudioconnect.com/content/3533/spiro/calc"
+curl -s -X POST --data '{"n1":13,"n2":-7,"n3":-3}' "https://beta.rstudioconnect.com/content/3533/spiro/calc"
 ```
 
 

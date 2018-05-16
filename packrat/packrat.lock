@@ -84,7 +84,7 @@ Package: ggplot2
 Source: CRAN
 Version: 2.2.1
 Hash: 46e5cb78836848aa44655e577433f54b
-Requires: MASS, digest, gtable, lazyeval, plyr, reshape2, scales,
+Requires: MASS, digest, gtable, lazyeval, plyr, scales, reshape2,
     tibble
 
 Package: glue
@@ -129,7 +129,7 @@ Package: knitr
 Source: CRAN
 Version: 1.20
 Hash: 9c6b215d1d02b97586c8232e94533e6a
-Requires: evaluate, highr, markdown, stringr, yaml
+Requires: highr, yaml, markdown, stringr, evaluate
 
 Package: labeling
 Source: CRAN
@@ -183,13 +183,13 @@ Package: pillar
 Source: CRAN
 Version: 1.2.2
 Hash: 9c4da206e8c0b21a14667c1baf69ee52
-Requires: cli, crayon, rlang, utf8
+Requires: crayon, rlang, utf8, cli
 
 Package: plumber
 Source: CRAN
 Version: 0.4.4
 Hash: f19938cb285dcf36a63f00f762d563c5
-Requires: R6, crayon, httpuv, jsonlite, stringi
+Requires: R6, crayon, jsonlite, stringi, httpuv
 
 Package: plyr
 Source: CRAN
@@ -206,7 +206,7 @@ Package: promises
 Source: CRAN
 Version: 1.0.1
 Hash: 1da7acbbc5a36e97d715bf15e72894cd
-Requires: R6, Rcpp, later, magrittr, rlang
+Requires: R6, Rcpp, magrittr, rlang, later
 
 Package: reshape2
 Source: CRAN
@@ -223,8 +223,8 @@ Package: rmarkdown
 Source: CRAN
 Version: 1.9
 Hash: ab7f84e6f41ed8d8e8b9a2031cf631f8
-Requires: base64enc, evaluate, htmltools, jsonlite, knitr, mime,
-    rprojroot, stringr, yaml
+Requires: base64enc, jsonlite, mime, yaml, rprojroot, htmltools,
+    stringr, evaluate, knitr
 
 Package: rprojroot
 Source: CRAN
@@ -236,8 +236,8 @@ Package: scales
 Source: CRAN
 Version: 0.5.0
 Hash: de72bbfa723acfaa28bb99788a303987
-Requires: R6, RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr,
-    viridisLite
+Requires: R6, RColorBrewer, Rcpp, dichromat, labeling, viridisLite,
+    plyr, munsell
 
 Package: stringi
 Source: CRAN
@@ -254,7 +254,7 @@ Package: tibble
 Source: CRAN
 Version: 1.4.2
 Hash: 83895360ce4f8d2ce92eee00526b5b0b
-Requires: cli, crayon, pillar, rlang
+Requires: crayon, rlang, cli, pillar
 
 Package: utf8
 Source: CRAN
@@ -265,6 +265,11 @@ Package: viridisLite
 Source: CRAN
 Version: 0.3.0
 Hash: 78bb072c4f9e729a283d4c40ec93f9c6
+
+Package: writexl
+Source: CRAN
+Version: 1.0
+Hash: e3056a2896bb3077bcdc7c4a053802a9
 
 Package: yaml
 Source: CRAN
